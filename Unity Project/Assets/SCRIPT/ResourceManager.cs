@@ -71,6 +71,7 @@ public class ResourceManager : MonoBehaviour
 }
 [System.Serializable]
 public class Resource{
+    [Tooltip("The Resources; Element0 is Energy, Element1 is Water, and Element2 is Material")]
     public float[] r = new float[3];
     public float Energy {get{return r[0];}}
     public float Water {get{return r[1];}}

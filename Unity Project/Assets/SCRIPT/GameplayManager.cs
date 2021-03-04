@@ -9,6 +9,7 @@ public class GameplayManager : MonoBehaviour
     public int currentTime = 0;
     public float timeSpeed;
     public float fastTimeSpeed;
+    public float superFastTimeSpeed;
     public float currentSpeed;
     public float monthTime;
     public bool timePaused = false;
@@ -85,6 +86,12 @@ public class GameplayManager : MonoBehaviour
     public void FastTime(){
         PauseTime(false);
         currentSpeed = fastTimeSpeed;
+        GM.I.ui.timeKeeper.UpdatePausedStatus();
+    }
+
+    public void SuperFastTime(){
+        PauseTime(false);
+        currentSpeed = superFastTimeSpeed;
         GM.I.ui.timeKeeper.UpdatePausedStatus();
     }
 

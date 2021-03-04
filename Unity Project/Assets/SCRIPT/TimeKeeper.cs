@@ -10,7 +10,7 @@ public class TimeKeeper : MonoBehaviour
     public Image border;
     public Slider travelIndicator;
     public GameObject playButton, pauseButton;
-    public Toggle pauseToggle, playToggle, fastToggle;
+    public Toggle pauseToggle, playToggle, fastToggle, superFastToggle;
     public Tooltip travelTip;
     public void UpdateClock(int time, float smoothTime){
         int month = time % 12;
@@ -44,6 +44,13 @@ public class TimeKeeper : MonoBehaviour
         }
     }
 
+    public void SuperFastButton(bool value){
+        if (value){
+            GM.I.gameplay.SuperFastTime();
+            GM.I.sfx.Play(SFX.PlaySuperFast);
+        }
+    }
+
 
     public void UpdatePausedStatus(){
         if(GM.I.gameplay.timePaused){
@@ -53,13 +60,16 @@ public class TimeKeeper : MonoBehaviour
             pauseToggle.SetIsOnWithoutNotify(true);
             playToggle.SetIsOnWithoutNotify(false);
             fastToggle.SetIsOnWithoutNotify(false);
-        }else if (GM.I.gameplay.currentSpeed == GM.I.gameplay.timeSpeed){
+            superFastToggle.SetIsOnWithoutNotify(false);
+        }
+        else if (GM.I.gameplay.currentSpeed == GM.I.gameplay.timeSpeed){
             clock.color = GM.I.art.light;
             border.color = GM.I.art.light;
             clockBar.color = GM.I.art.light;
             pauseToggle.SetIsOnWithoutNotify(false);
             playToggle.SetIsOnWithoutNotify(true);
             fastToggle.SetIsOnWithoutNotify(false);
+            superFastToggle.SetIsOnWithoutNotify(false);
         }
         else if (GM.I.gameplay.currentSpeed == GM.I.gameplay.fastTimeSpeed){
             clock.color = GM.I.art.greenLight;
@@ -68,6 +78,16 @@ public class TimeKeeper : MonoBehaviour
             pauseToggle.SetIsOnWithoutNotify(false);
             playToggle.SetIsOnWithoutNotify(false);
             fastToggle.SetIsOnWithoutNotify(true);
+            superFastToggle.SetIsOnWithoutNotify(false);
+        }
+        else if (GM.I.gameplay.currentSpeed == GM.I.gameplay.superFastTimeSpeed){
+            clock.color = GM.I.art.otherBlueLight;
+            border.color = GM.I.art.otherBlueLight;
+            clockBar.color = GM.I.art.otherBlueLight;
+            pauseToggle.SetIsOnWithoutNotify(false);
+            playToggle.SetIsOnWithoutNotify(false);
+            fastToggle.SetIsOnWithoutNotify(false);
+            superFastToggle.SetIsOnWithoutNotify(true);
         }
     }
 

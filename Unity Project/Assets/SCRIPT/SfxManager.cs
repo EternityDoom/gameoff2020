@@ -44,5 +44,6 @@ public enum SFX{
     Build,
     Talk,
     ShieldUp,
-    SuperNova
+    SuperNova,
+    PlaySuperFast
 }

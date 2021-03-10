@@ -10,6 +10,9 @@ public class Achievement : MonoBehaviour
     public GameObject icon, lockIcon, iconHolder, hint;
     public Color color;
 
+    /// <summary>
+    /// Called when the achievement is enabled, shows/hides information about the achievement
+    /// </summary>
     private void OnEnable() {
         if(PlayerPrefs.GetInt(linkedAchievement, 0) == 1){
             iconHolder.SetActive(true);            
@@ -26,6 +29,10 @@ public class Achievement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Displays the hint of the achievement
+    /// </summary>
+    /// <param name="value">A boolean used to determine whether the hit needs to be enabled or disabled</param>
     public void ShowHint(bool value){
         hint.SetActive(value);
         iconHolder.SetActive(!value);

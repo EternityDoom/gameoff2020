@@ -43,6 +43,10 @@ public class PopulationMenu : MonoBehaviour
 
     public AudioClip openPopSfx, openMoodSfx, closePopSfx, closeMoodSfx;
 
+    /// <summary>
+    /// Opens the more detailed population menu when clicked
+    /// </summary>
+    /// <param name="sfx">The boolean showing whether a sound should play on click</param>
     public void ClicPopulationMenu(bool sfx){
         bool value = !gameObject.activeInHierarchy;
         if(value){
@@ -57,6 +61,10 @@ public class PopulationMenu : MonoBehaviour
         gameObject.SetActive(value);
     }
 
+    /// <summary>
+    /// Opens the populations mood menu
+    /// </summary>
+    /// <param name="sfx">The boolean showing whether a sound should play on clicks</param>
     public void ClicMoodMenu(bool sfx){
         bool value = !moodMenu.activeInHierarchy;
         if(value){
@@ -71,6 +79,9 @@ public class PopulationMenu : MonoBehaviour
         moodMenu.SetActive(value);
     }
 
+    /// <summary>
+    /// Updates the values displayed on the population menu
+    /// </summary>
     public void UpdateMenu(){
         totalText.text = UIManager.HumanNotation(GM.I.people.TotalPopulation);
         totalOverviewText.text = totalText.text;
@@ -145,6 +156,12 @@ public class PopulationMenu : MonoBehaviour
         hopeIcon.color = GM.I.people.hope < 0.5f? GM.I.art.red : GM.I.art.green;
     }
 
+    /// <summary>
+    /// Processes the status of the populations mood
+    /// </summary>
+    /// <param name="mood">The mood value</param>
+    /// <param name="text">The text value to modify</param>
+    /// <param name="text2">The second text value to modify</param>
     void ProcessMood(float mood, Text text, Text text2){
         Color color = Color.white;
         if(mood < 0.25f){

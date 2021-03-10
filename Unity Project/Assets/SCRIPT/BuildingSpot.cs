@@ -66,6 +66,9 @@ public class BuildingSpot : MonoBehaviour
         UpdateVisual();
     }
 
+    /// <summary>
+    /// Builds the building on a specific location
+    /// </summary>
     public void Build(){
         currentBuilding = GM.I.ui.buildingMenu.selectedBuilding;
         integrity = 1f;
@@ -79,6 +82,9 @@ public class BuildingSpot : MonoBehaviour
         GM.I.sfx.Play(SFX.Build, Random.Range(0.8f, 1.2f));
     }
 
+    /// <summary>
+    /// Destroys a specific building
+    /// </summary>
     public void Destroy(){
         currentBuilding = null;
         currentProject = null;
@@ -91,6 +97,9 @@ public class BuildingSpot : MonoBehaviour
         GM.I.city.UpdateCityVisuals();
     }
 
+    /// <summary>
+    /// Updates a specific building
+    /// </summary>
     public void UpdateBuilding(){
         if(currentBuilding == null){
             return;
@@ -142,6 +151,9 @@ public class BuildingSpot : MonoBehaviour
         UpdateVisual();
     }
 
+    /// <summary>
+    /// Processes the integrity of the building
+    /// </summary>
     void ProcessIntegrity(){
         if(maintenance){
             integrity = Mathf.Min(integrity + 0.01f, 1f);
@@ -155,6 +167,9 @@ public class BuildingSpot : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Processes the efficiency of the building
+    /// </summary>
     void ProcessEfficiency(){
         costEfficiencyModifier = 1f;
         efficiencyModifier = 0f;
@@ -188,6 +203,9 @@ public class BuildingSpot : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Selects a building
+    /// </summary>
     public void Select(){
         GM.I.ui.buildingInformation.ShowBuildingInfo(this);
         GM.I.city.UnselectAll();
@@ -197,16 +215,26 @@ public class BuildingSpot : MonoBehaviour
         UpdateVisual();
     }
 
+    /// <summary>
+    /// Unselects a building
+    /// </summary>
     public void Unselect(){
         GM.I.ui.buildingInformation.ShowBuildingInfo(null);
         selected = false;
         UpdateVisual();
     }
 
+    /// <summary>
+    /// Returns the amount of resources provided by this building
+    /// </summary>
+    /// <returns></returns>
     public float ResourcePortion(){
         return GM.I.resource.resources.r[currentBuilding.ressourceType] * (storage/GM.I.city.Storage(currentBuilding.ressourceType));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void Update() {
         if(mode == BuildingSpotMode.Building && currentBuilding == null){
             positionRing.GetComponent<ButtonMesh>().highlight.GetComponent<MeshRenderer>().material.color = GM.I.ui.buildingMenu.selectedBuilding.color;
@@ -214,6 +242,9 @@ public class BuildingSpot : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Show the tooltip for a building
+    /// </summary>
     public void ShowTooltip(){
         List<string> statuses = new List<string>();
         List<Color> colors = new List<Color>();
@@ -229,10 +260,17 @@ public class BuildingSpot : MonoBehaviour
         }
         GM.I.tooltip.ShowTooltip(tooltip, Vector2.up * 10);
     }
+    
+    /// <summary>
+    /// Hides a tooltip for a building
+    /// </summary>
     public void HideTooltip(){
         GM.I.tooltip.HideTooltip();        
     }
 
+    /// <summary>
+    /// Update the display for a building
+    /// </summary>
     public void UpdateVisual(){
 
         if(currentBuilding != null){

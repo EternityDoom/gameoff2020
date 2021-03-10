@@ -18,6 +18,10 @@ public class BuildingMenu : MonoBehaviour
 
     public AudioClip openSfx, closeSfx;
 
+    /// <summary>
+    /// Called when the building menu button is clicked on
+    /// </summary>
+    /// <param name="sfx">Determines whether a sound is played on button click</param>
     public void ClicBuildingMenu(bool sfx){
         bool value = !gameObject.activeInHierarchy;
         gameObject.SetActive(value);
@@ -42,10 +46,17 @@ public class BuildingMenu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void Start() {
         SelectBuilding(true);
     }
 
+    /// <summary>
+    /// Called when the user selects a specific building
+    /// </summary>
+    /// <param name="value">The value passed in by the default on-click</param>
     public void SelectBuilding(bool value){
         if(value){
             foreach (BuildingToggle choice in choices)

@@ -15,7 +15,9 @@ public class ButtonMesh : MonoBehaviour
     public UnityEvent onEnter;
     public UnityEvent onExit;
     
-
+    /// <summary>
+    /// Called when the button is enabled
+    /// </summary>
     private void OnEnable() {
         if(highlight != null){
             highlight.SetActive(false);
@@ -28,6 +30,9 @@ public class ButtonMesh : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When the mouse enters the range of the button
+    /// </summary>
     private void OnMouseEnter() {
         if(eventSystem.IsPointerOverGameObject()){return;}
         if(GM.I.gameplay.currentTime < GM.I.gameplay.travelLenght){
@@ -44,6 +49,9 @@ public class ButtonMesh : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When the mouse exits the range of the button
+    /// </summary>
     private void OnMouseExit() {
         onExit.Invoke();
         if(highlight != null){
@@ -57,6 +65,9 @@ public class ButtonMesh : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When the mouse is clicked on the button
+    /// </summary>
     private void OnMouseDown() {
         if(eventSystem.IsPointerOverGameObject()){return;}
         if(GM.I.gameplay.currentTime < GM.I.gameplay.travelLenght){

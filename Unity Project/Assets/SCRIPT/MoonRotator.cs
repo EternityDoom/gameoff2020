@@ -12,7 +12,10 @@ public class MoonRotator : MonoBehaviour
     public float lerpSpeed;
     public EventSystem eventSystem;
     public bool interactable = true;
-    // Update is called once per frame
+
+    /// <summary>
+    /// Called once per frame. Used to rotate the moon based on user input
+    /// </summary>
     void Update()
     {
         if(Input.GetMouseButton(0) && !eventSystem.IsPointerOverGameObject()&&interactable){
@@ -23,6 +26,11 @@ public class MoonRotator : MonoBehaviour
         mousePos = Input.mousePosition;
         transform.rotation = Quaternion.Lerp(transform.rotation, target.rotation, Time.deltaTime * lerpSpeed);
     }
+
+    /// <summary>
+    /// Shows building spots that are needed to display.
+    /// </summary>
+    /// <param name="spot">The transform of the building spot that needs shown</param>
     public void ShowBuildingSpot(Transform spot){
         target.rotation = Quaternion.FromToRotation(spot.localPosition, Vector3.back);
     }

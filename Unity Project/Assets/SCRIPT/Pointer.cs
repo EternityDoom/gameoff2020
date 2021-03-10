@@ -8,7 +8,9 @@ public class Pointer : MonoBehaviour
     public LineRenderer line;
     public float radius;
 
-    // Update is called once per frame
+    /// <summary>
+    /// Called once per frame. Draws a line from one point to a target point
+    /// </summary>
     void Update()
     {
         if(target != null){

@@ -11,6 +11,9 @@ public class BuildingToggle : Toggle
     public Text buildingDescription;
     public RessourceBox cost;
 
+    /// <summary>
+    /// Toggles the buildings image/colors
+    /// </summary>
     public void InitializeMiniature(){
         buildingImage.sprite = building.sprite;
         buildingImage.color = building.color;

@@ -35,6 +35,9 @@ public class GM : MonoBehaviour
     public TooltipManager tooltip;
     public IntroManager introManager;
 
+    /// <summary>
+    /// Is called when the game is quit, quits the game
+    /// </summary>
     public void Quit(){
         Application.Quit();
     }

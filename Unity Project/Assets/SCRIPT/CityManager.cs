@@ -7,6 +7,10 @@ public class CityManager : MonoBehaviour
     public GameObject standardMoon, holoMoon;
     public List<BuildingSpot> buildings;
     public List<Connection> connections;
+
+    /// <summary>
+    /// Instantiates the building spots and connections on game start
+    /// </summary>
     private void Awake() {
         foreach (BuildingSpot spot in buildings)
         {
@@ -19,6 +23,10 @@ public class CityManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns the number of building spots that are currently housing spaces
+    /// </summary>
+    /// <returns></returns>
     public int HousingSpace(){
         int space = 0;
         foreach (BuildingSpot building in buildings)
@@ -30,6 +38,10 @@ public class CityManager : MonoBehaviour
         return space;
     }
 
+    /// <summary>
+    /// Returns the number of building spots that are currently culture spaces
+    /// </summary>
+    /// <returns></returns>
     public int Culture(){
         int space = 2;
         foreach (BuildingSpot building in buildings)
@@ -41,6 +53,10 @@ public class CityManager : MonoBehaviour
         return space;
     }
 
+    /// <summary>
+    /// Returns the number of building spots that are currently housing spaces
+    /// </summary>
+    /// <returns></returns>
     public int Housing(){
         int housing = 0;
         foreach (BuildingSpot building in buildings)
@@ -52,6 +68,10 @@ public class CityManager : MonoBehaviour
         return housing;
     }
 
+    /// <summary>
+    /// Returns the number of building spots that are currently workplace spaces
+    /// </summary>
+    /// <returns></returns>
     public int WorkplaceSpace(){
         int space = 0;
         foreach (BuildingSpot b in buildings)
@@ -66,6 +86,10 @@ public class CityManager : MonoBehaviour
         return space;
     }
 
+    /// <summary>
+    /// Returns the number of building spots that are currently workplace spaces
+    /// </summary>
+    /// <returns></returns>
     public int Workplace(){
         int workplace = 0;
         foreach (BuildingSpot b in buildings)
@@ -79,6 +103,11 @@ public class CityManager : MonoBehaviour
         return workplace;
     }
 
+    /// <summary>
+    /// Returns the number of building spots that are currently storage spaces
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
     public float Storage(int type){
         float storage = 0;
         foreach (BuildingSpot building in buildings)
@@ -90,9 +119,18 @@ public class CityManager : MonoBehaviour
         return storage;
     }
 
+    /// <summary>
+    /// Returns whether the resources have a shortage or not
+    /// </summary>
+    /// <returns></returns>
     public bool ResourceShortage(){
         return buildings[0].Cost.Limited(GM.I.resource.resources);
     }
+
+    /// <summary>
+    /// Updates the building spots to what mode is needed
+    /// </summary>
+    /// <param name="mode">The mode to set the spots to</param>
     public void SetBuildingSpotMode(BuildingSpotMode mode){
         foreach (BuildingSpot building in buildings)
         {
@@ -100,6 +138,10 @@ public class CityManager : MonoBehaviour
             building.UpdateVisual();
         }
     }
+
+    /// <summary>
+    /// Unselects all of the building spots
+    /// </summary>
     public void UnselectAll(){
         foreach (BuildingSpot building in buildings)
         {
@@ -108,6 +150,9 @@ public class CityManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates every building in the city
+    /// </summary>
     public void UpdateCity(){
         foreach (BuildingSpot building in buildings)
         {
@@ -115,6 +160,9 @@ public class CityManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates all of the building visuals in the city
+    /// </summary>
     public void UpdateCityVisuals(){
         foreach (BuildingSpot building in buildings)
         {
@@ -122,11 +170,19 @@ public class CityManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the moon mesh
+    /// </summary>
+    /// <param name="holo">If true then the moon needs to use the holo mesh, otherwise use the non-holo mesh</param>
     public void ShowHoloMoon(bool holo){
         standardMoon.SetActive(!holo);
         holoMoon.SetActive(holo);
     }
 
+    /// <summary>
+    /// Updates the integrity of the buildings
+    /// </summary>
+    /// <param name="amount">The amount to update the building integrity by</param>
     public void ModifyIntegrity(float amount){
         foreach (BuildingSpot building in buildings)
         {

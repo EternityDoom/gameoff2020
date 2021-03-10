@@ -5,9 +5,19 @@ using UnityEngine.UI;
 
 public class WarningChoice : MonoBehaviour
 {
+    //The name of the choice and the effect that it has on your resources
     public Text choiceName, choiceEffect;
+
+    //The button that is bound to the event choice
     public Button myButton;
+
+    //The users currently selected choice
     public EventChoice currentChoice;
+
+    /// <summary>
+    /// The method that is called in order to create the button that is displayed for the warning menu
+    /// </summary>
+    /// <param name="data">The data that is meant to be displayed on the button</param>
     public void InitChoice(EventChoice data){
         if(data == null){
             gameObject.SetActive(false);
@@ -29,6 +39,12 @@ public class WarningChoice : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The method used to display the amount the choice effects your resources
+    /// </summary>
+    /// <param name="fxt">The resource that will be effected</param>
+    /// <param name="amount">The amount that the specific resource will sbe effected</param>
+    /// <returns>Returns the text value that will display the amount the choice effects the resources</returns>
     string EffectString(FXT fxt, float amount){
         string output = "";
         if(fxt == FXT.Needs || fxt == FXT.Comfort || fxt == FXT.Culture || fxt == FXT.Hope || fxt == FXT.Integrity){
@@ -57,6 +73,10 @@ public class WarningChoice : MonoBehaviour
         return output;
     }
 
+    /// <summary>
+    /// The method used to display the flavor text of the choice
+    /// </summary>
+    /// <param name="onOff">A boolean used to determine what description is shown, if true then it will display the description otherwise it will not</param>
     public void ShowFlavorText(bool onOff){
         if(onOff){
             GM.I.ui.warningMenu.ShowFlavorText(currentChoice.description);
@@ -65,6 +85,9 @@ public class WarningChoice : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The function that is called when a choice is selected and finalized.
+    /// </summary>
     public void MakeChoice(){
         GM.I.ui.warningMenu.ShowFlavorText("");
         GM.I.ui.warningMenu.warningPannel.SetActive(false);
@@ -76,6 +99,11 @@ public class WarningChoice : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Updates your resources based on what the choices resource effects are.
+    /// </summary>
+    /// <param name="type">Which resource is effected by the choice</param>
+    /// <param name="amount">The amount that the resource is effected by the choice</param>
     void ProcessEffect(FXT type, float amount){
         switch (type)
         {
@@ -114,6 +142,12 @@ public class WarningChoice : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the choice to be unclickable if the amount of resources the user does not have enough resources for it
+    /// </summary>
+    /// <param name="type">The resource that is tied to the choice</param>
+    /// <param name="amount">The amount of the resource that the user has</param>
+    /// <returns>Returns a boolean that says whether an option is limited</returns>
     bool IsLimited(FXT type, float amount){
         switch (type)
         {

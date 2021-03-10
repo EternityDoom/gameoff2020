@@ -5,14 +5,30 @@ using UnityEngine.UI;
 
 public class ResourceMeters : MonoBehaviour
 {
+    //The image for the energy, water, and material resources
     public Image energy, water, material;
+
+    //The text value for the energy, water, and material resources
     public Text energyText, waterText, materialText;
+    
+    //The text value for the change in energy, water, and material resources
     public Text energyDeltaText, waterDeltaText, materialDeltaText;
+    
+    //The text value for how much resources are being produce
     public Text energyProductionText, waterProductionText, materialProductionText;
+    
+    //The text value for how much resources are being used
     public Text energyCostText, waterCostText, materialCostText;
+    
+    //The last amount of resources the user had
     public Resource lastDelta;
+    
+    //A list of all resource boxes that should be displayed
     public List<RessourceBox> buildingDeltaBoxes;
 
+    /// <summary>
+    /// Updates the text values for all of the resources
+    /// </summary>
     public void UpdateResources(){
         Resource r = GM.I.resource.resources;
         Resource delta = new Resource();

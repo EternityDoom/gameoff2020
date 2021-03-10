@@ -60,7 +60,10 @@ public class BuildingInformation : MonoBehaviour
     public Project selectedProject;
 
 
-
+    /// <summary>
+    /// Shows the information for a specific building spot
+    /// </summary>
+    /// <param name="spot">The building spot you want to see the info on</param>
     public void ShowBuildingInfo(BuildingSpot spot){
         if(spot != null){
             gameObject.SetActive(true);
@@ -108,6 +111,10 @@ public class BuildingInformation : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the information for a specific building spot
+    /// </summary>
+    /// <param name="spot">The building spot that you want to update</param>
     public void UpdateMenuInfo(BuildingSpot spot){
         
         buildingImage.sprite = spot.currentBuilding.sprite;
@@ -182,11 +189,27 @@ public class BuildingInformation : MonoBehaviour
             DestroyMenu(false);
         }
     }
+    
+    /// <summary>
+    /// Processes the status of a specific building
+    /// </summary>
+    /// <param name="spot">The building spot to process the status of</param>
+    /// <param name="updateText">The text to update the status to</param>
+    /// <returns></returns>
     public int ProcessStatus(BuildingSpot spot, bool updateText){
         List<string> statuses = new List<string>();
         List<Color> colors = new List<Color>();
         return ProcessStatus(spot, updateText, ref statuses, ref colors);
     }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="spot"></param>
+    /// <param name="updateText"></param>
+    /// <param name="statuses"></param>
+    /// <param name="colors"></param>
+    /// <returns></returns>
     public int ProcessStatus(BuildingSpot spot, bool updateText, ref List<string> statuses, ref List<Color> colors){
         if(updateText){
             foreach (Text text in statusTexts)
@@ -275,6 +298,15 @@ public class BuildingInformation : MonoBehaviour
         return statusNumber;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="txt"></param>
+    /// <param name="color"></param>
+    /// <param name="alert"></param>
+    /// <param name="statuses"></param>
+    /// <param name="colors"></param>
+    /// <param name="updateText"></param>
     void ProcessIndividualStatus(string txt, Color color, GameObject alert, ref List<string> statuses, ref List<Color> colors, bool updateText){
         statuses.Add(txt);
         colors.Add(color);
@@ -283,17 +315,29 @@ public class BuildingInformation : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the information displayed on the menu
+    /// </summary>
     public void UpdateMenuInfo(){
         if(selectedSpot != null){
             UpdateMenuInfo(selectedSpot);
         }
     }
 
+    /// <summary>
+    /// Updates maintenence to enable/disable
+    /// </summary>
+    /// <param name="onOff">The boolean to update the maintenence to</param>
     public void StartMaintenance(bool onOff){
         StartMaintenance(onOff, selectedSpot);
         
     }
 
+    /// <summary>
+    /// Updates maintenence to enable/disable
+    /// </summary>
+    /// <param name="onOff">The boolean to update the maintenence to</param>
+    /// <param name="spot">The specific building spot to update</param>
     public void StartMaintenance(bool onOff, BuildingSpot spot){
         spot.maintenance = onOff;
         startMaintenanceButton.SetActive(!onOff);
@@ -301,10 +345,19 @@ public class BuildingInformation : MonoBehaviour
         integrityMeterOutline.color = onOff? GM.I.art.white : GM.I.art.light;
     }
 
+    /// <summary>
+    /// Update the production status of buildings
+    /// </summary>
+    /// <param name="onOff">The boolean to update the production status to</param>
     public void StopProduction(bool onOff){
         StopProduction(onOff, selectedSpot);
     }
 
+    /// <summary>
+    /// Update the production status of buildings
+    /// </summary>
+    /// <param name="onOff">The boolean to update the production status to</param>
+    /// <param name="spot">The specific building spot to update</param>
     public void StopProduction(bool onOff, BuildingSpot spot){
         spot.producing = !onOff;
         stopProduction.SetActive(!onOff);

@@ -6,6 +6,9 @@ public class BuildingOverview : MonoBehaviour
 {
     public float rotateSpeed;
 
+    /// <summary>
+    /// Rotates the building by a certain amount
+    /// </summary>
     // Update is called once per frame
     void Update()
     {

@@ -9,6 +9,9 @@ public class AudioManager : MonoBehaviour
     int index;
     public bool canPlay;
 
+    /// <summary>
+    /// Updates the status of the audio source based on whether the audio can play
+    /// </summary>
     private void Update() {
         if(!audioSource.isPlaying && canPlay){
             audioSource.PlayOneShot(songs[index]);
@@ -19,6 +22,10 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the volume of the audio system
+    /// </summary>
+    /// <param name="amount">The amount to update the audio system by</param>
     public void SetVolume(float amount){
         audioSource.volume = amount;
         AudioDontDestroy.I.source.volume = amount;

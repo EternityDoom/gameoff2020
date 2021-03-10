@@ -4,23 +4,56 @@ using UnityEngine;
 
 public class ProjectManager : MonoBehaviour
 {
+    //All projects that will be managed
     public List<Project> projects;
+    
+    //The levels that each project has
     public List<int> levels;
+    
+    //The amount of time that each project has until it is completed
     public List<int> time;
 
+    /// <summary>
+    /// Gets the amount of time that each project has remaining
+    /// </summary>
+    /// <param name="project">The project you want to get the time of</param>
+    /// <returns>Returns the amount of time remaining on the project</returns>
     public int GetTime(Project project){
         return time[projects.IndexOf(project)];
     }
+    
+    /// <summary>
+    /// Gets the level of a specific project
+    /// </summary>
+    /// <param name="project">The project you want to get the level of</param>
+    /// <returns>Returns the level of a specific project</returns>
     public int GetLevel(Project project){
         return levels[projects.IndexOf(project)];
     }
 
+    /// <summary>
+    /// Checks a project to see if it is constantly processing
+    /// </summary>
+    /// <param name="project">The project that you want to check</param>
+    /// <returns>Returns a boolean determining whether the project is constant or not</returns>
     public bool IsConstant(Project project){
         return project.projectLength.x < 0;
     }
+    
+    /// <summary>
+    /// Gets the level of the project and checks if it is maxed
+    /// </summary>
+    /// <param name="project">The project you are checking</param>
+    /// <returns>Returns a boolean stating whether a project is maxed or not</returns>
     public bool IsMaxed(Project project){
         return levels[projects.IndexOf(project)] == 3;
     }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
     public float FX(FXT type){
         foreach (Project p in projects)
         {
@@ -41,6 +74,12 @@ public class ProjectManager : MonoBehaviour
         
         return 1f;
     }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="project"></param>
+    /// <returns></returns>
     public int GetLength(Project project){
         if(GetLevel(project)<3){
             return project.projectLength[GetLevel(project)];
@@ -48,6 +87,9 @@ public class ProjectManager : MonoBehaviour
         return 0;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void UpdateProjects(){
         
         for (int i = 0; i < projects.Count; i++)

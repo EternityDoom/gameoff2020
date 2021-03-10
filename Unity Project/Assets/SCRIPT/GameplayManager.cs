@@ -31,6 +31,10 @@ public class GameplayManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Updates the time and processes all events that happen when time changes
+    /// </summary>
+    /// <param name="force">If true then the process is forced to go through regardless of if time is paused</param>
     public void UpdateTime(bool force){
         timer += Time.deltaTime;
         if(!timePaused){
@@ -78,23 +82,37 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Determines if the timer needs paused or should play at normal speed
+    /// </summary>
+    /// <param name="shouldStop">If true then pauses, otherwise plays at normal speed</param>
     public void PauseTime(bool shouldStop){
         timePaused = shouldStop;
         currentSpeed = timeSpeed;
         GM.I.ui.timeKeeper.UpdatePausedStatus();
     }
+
+    /// <summary>
+    /// Processes the game at fast time speed
+    /// </summary>
     public void FastTime(){
         PauseTime(false);
         currentSpeed = fastTimeSpeed;
         GM.I.ui.timeKeeper.UpdatePausedStatus();
     }
 
+    /// <summary>
+    /// Processes the game at super fast time speed
+    /// </summary>
     public void SuperFastTime(){
         PauseTime(false);
         currentSpeed = superFastTimeSpeed;
         GM.I.ui.timeKeeper.UpdatePausedStatus();
     }
 
+    /// <summary>
+    /// Checks if the game has met the win requirements
+    /// </summary>
     void CheckWinConditions(){
         if(currentTime >= travelLenght){
             rotator.interactable = false;
@@ -154,6 +172,9 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the game has met the lose requirements
+    /// </summary>
     void CheckLooseConditions(){
         if(GM.I.people.TotalPopulation < 1){
             GM.I.ui.ShowLooseScreen();
@@ -174,6 +195,9 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Restarts the game from the start as if the user just pressed the Play Button
+    /// </summary>
     public void Restart(){
         Analytics.CustomEvent("RestartGame", new Dictionary<string, object>
         {
@@ -191,6 +215,9 @@ public class GameplayManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 
+    /// <summary>
+    /// Returns the player to the main menu
+    /// </summary>
     public void GoToMenu(){
         Analytics.CustomEvent("RestartGame", new Dictionary<string, object>
         {

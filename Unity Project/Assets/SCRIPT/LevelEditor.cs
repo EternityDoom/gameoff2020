@@ -24,7 +24,9 @@ public class LevelEditor : MonoBehaviour
     public float offsetRadius;
     public float offsetZ;
 
-    // Update is called once per frame
+    /// <summary>
+    /// 
+    /// </summary>
     void Update()
     {
         // Place building spots

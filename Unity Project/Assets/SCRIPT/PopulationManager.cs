@@ -31,6 +31,13 @@ public class PopulationManager : MonoBehaviour
     public float NeedsThreshold{get{return 200 + GM.I.project.FX(FXT.Needs) + 5 * (TotalPopulation/50000);}}
     public float ComfortThreshold{get{return GM.I.city.HousingSpace()+ GM.I.project.FX(FXT.Comfort);}}
     public float CultureThreshold{get{return (float)(GM.I.city.Culture() * 50000f + GM.I.project.FX(FXT.Culture)+ GM.I.project.FX(FXT.Idle));}}
+    
+    /// <summary>
+    /// Gets the populations range
+    /// </summary>
+    /// <param name="min">The minimum population</param>
+    /// <param name="max">The maximum population</param>
+    /// <returns>Returns the populations range</returns>
     public uint GetPopulationRange(int min, int max){
         uint total = 0;
             for (int i = min * 12; i < max * 12; i++)
@@ -39,6 +46,12 @@ public class PopulationManager : MonoBehaviour
             }
             return total;
     }
+    
+    /// <summary>
+    /// Gets the populations range
+    /// </summary>
+    /// <param name="minMax">The min/max population</param>
+    /// <returns>Returns the population range</returns>
     public uint GetPopulationRange(Vector2Int minMax){
         return GetPopulationRange(minMax.x, minMax.y);
     }
@@ -92,6 +105,9 @@ public class PopulationManager : MonoBehaviour
 
     // --------------- Game functions
 
+    /// <summary>
+    /// Instantiates the population and death probabilities on game start
+    /// </summary>
     private void Awake() {
         // Translate animation curves
         for (int i = 0; i < Population.Length; i++)
@@ -102,6 +118,10 @@ public class PopulationManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Kills a certain number of people within the population
+    /// </summary>
+    /// <param name="amount">The amount of people to be killed</param>
     public void Kill(float amount){
         for (int i = 0; i < Population.Length; i++)
         {
@@ -109,6 +129,9 @@ public class PopulationManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles the aging process for the population
+    /// </summary>
     public void ProcessAging(){
         // Calculate births
         int agingPouplationSlice = MonthlyBirth;
@@ -136,6 +159,9 @@ public class PopulationManager : MonoBehaviour
         GM.I.ui.populationMenu.UpdateMenu();
     }
 
+    /// <summary>
+    /// Handles the mood of the population
+    /// </summary>
     public void ProcessMood(){
         ProcessNeeds();
         ProcessComfort();
@@ -146,6 +172,9 @@ public class PopulationManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Processes the needs of the population (used for determining mood)
+    /// </summary>
     void ProcessNeeds(){
         float needsDelta = 0;
         float threshold = NeedsThreshold;
@@ -161,6 +190,9 @@ public class PopulationManager : MonoBehaviour
         needs = Mathf.Clamp(needs, needsDelta/3f,1);
     }
 
+    /// <summary>
+    /// Processes the comfort of the population (used for determining mood)
+    /// </summary>
     void ProcessComfort(){
         if(TotalPopulation  < ComfortThreshold){
             comfort += cultureGain;
@@ -172,6 +204,9 @@ public class PopulationManager : MonoBehaviour
         comfort = Mathf.Clamp(comfort, 0,1);
     }
 
+    /// <summary>
+    /// Processes the culture of the population (used for determining mood)
+    /// </summary>
     void ProcessCulture(){
         float cultureRatio = (float)TotalPopulation/CultureThreshold;
         if(cultureRatio < 0.5){
@@ -188,6 +223,9 @@ public class PopulationManager : MonoBehaviour
         culture = Mathf.Clamp(culture, 0,1);
     }
 
+    /// <summary>
+    /// Processes the hope of the population (used for determining mood)
+    /// </summary>
     void ProcessHope(){
         hope = Mathf.Clamp(hope, 0,1) + GM.I.project.FX(FXT.Hope);
     }

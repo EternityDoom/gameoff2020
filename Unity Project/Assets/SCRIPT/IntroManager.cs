@@ -44,14 +44,20 @@ public class IntroManager : MonoBehaviour
     int currentStepLine = 0;
 
     public Coroutine dialogRoutine;
-    // Start is called before the first frame update
+
+    /// <summary>
+    /// 
+    /// </summary>
     void Start()
     {
         StartCoroutine(IntroCoroutine());
     }
 
     
-
+    /// <summary>
+    /// The coroutine that runs while the intro is being played through
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator IntroCoroutine(){
         Analytics.CustomEvent("StartGame");
         controlUIgroup.alpha = 0;
@@ -178,6 +184,9 @@ public class IntroManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Is called when the user presses the skip intro button, skips the tutorial
+    /// </summary>
     public void SkipIntro(){
         StopCoroutine(dialogRoutine);
         GM.I.audioManager.canPlay = true;
@@ -199,6 +208,12 @@ public class IntroManager : MonoBehaviour
         Analytics.CustomEvent("IntroSkipped");
     }
 
+    /// <summary>
+    /// Manages the tutorial dialogue
+    /// </summary>
+    /// <param name="dialog">The strings for all dialogue</param>
+    /// <param name="closeOnEnd">If true the dialogue box closes after the dialogue is printed</param>
+    /// <returns></returns>
     public IEnumerator ProcessDialogLine(List<string> dialog, bool closeOnEnd = true){
         dialogBox.SetActive(true);
         currentStepLine = 0;
